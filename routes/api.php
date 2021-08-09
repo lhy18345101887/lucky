@@ -16,3 +16,12 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+
+Route::prefix('admin')->group(function () {
+
+    Route::post('login', 'Admin\LoginController@login')->name('admin_login');
+
+    Route::get('index', 'Admin\LoginController@index')->name('admin_login_index');
+
+});

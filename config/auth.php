@@ -44,8 +44,16 @@ return [
         'api' => [
             'driver' => 'token',
             'provider' => 'users',
-            'hash' => false,
+            'hash' => true,
+            'storage_key' => 'api_token',
         ],
+
+        'admin' => [
+            'driver' => 'token',
+            'provider' => 'admin',
+            'hash' => true,
+            'storage_key' => 'api_token',
+        ]
     ],
 
     /*
@@ -70,6 +78,13 @@ return [
             'driver' => 'eloquent',
             'model' => App\User::class,
         ],
+
+        'admin' => [
+            'driver' => 'eloquent',
+            'model' => App\Model\Admin\User::class,
+        ],
+
+
 
         // 'users' => [
         //     'driver' => 'database',
