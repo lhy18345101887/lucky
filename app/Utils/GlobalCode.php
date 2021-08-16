@@ -3,6 +3,6 @@ namespace App\Utils;
 
 class GlobalCode
 {
-    const SUCEESS = 2001;
+    const SUCEESS = 20000;
     const ERROR = 5001;
 }

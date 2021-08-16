@@ -17,11 +17,14 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::post('/oauth/token', '\Laravel\Passport\Http\Controllers\AccessTokenController@issueToken');
 
 Route::prefix('admin')->group(function () {
-
-    Route::post('login', 'Admin\LoginController@login')->name('admin_login');
-
-    Route::get('index', 'Admin\LoginController@index')->name('admin_login_index');
+    Route::post('/register', 'Admin\LoginController@register');
+    Route::post('/login', 'Admin\LoginController@login');
+    Route::post('/refresh', 'Admin\LoginController@refresh');
+    Route::post('/logout', 'Admin\LoginController@logout');
+    Route::post('/create_user', 'Admin\LoginController@create');
+    Route::get('/get_user_info', 'Admin\UserController@getUserInfo');
 
 });

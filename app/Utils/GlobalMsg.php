@@ -11,7 +11,7 @@ trait GlobalMsg
     public function codeSuccess(string $msg = "成功", array $data = []):object
     {
         return response()->json([
-            'status' => GlobalCode::SUCEESS,
+            'code' => GlobalCode::SUCEESS,
             'msg' => $msg,
             'data' => $data
         ]);
@@ -21,7 +21,7 @@ trait GlobalMsg
     {
 
         return response()->json([
-            'status' => GlobalCode::ERROR,
+            'code' => GlobalCode::ERROR,
             'msg' => $msg,
             'data' => $data
         ]);

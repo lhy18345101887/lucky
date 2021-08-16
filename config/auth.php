@@ -14,7 +14,7 @@ return [
     */
 
     'defaults' => [
-        'guard' => 'web',
+        'guard' => 'admin',
         'passwords' => 'users',
     ],
 
@@ -42,10 +42,9 @@ return [
         ],
 
         'api' => [
-            'driver' => 'token',
+            'driver' => 'passport',
             'provider' => 'users',
-            'hash' => true,
-            'storage_key' => 'api_token',
+
         ],
 
         'admin' => [
@@ -53,6 +52,7 @@ return [
             'provider' => 'admin',
             'hash' => true,
             'storage_key' => 'api_token',
+
         ]
     ],
 
@@ -109,7 +109,7 @@ return [
 
     'passwords' => [
         'users' => [
-            'provider' => 'users',
+            'provider' => 'admin',
             'table' => 'password_resets',
             'expire' => 60,
             'throttle' => 60,

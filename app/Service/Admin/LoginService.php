@@ -2,12 +2,20 @@
 
 namespace App\Service\Admin;
 
+use App\Events\LoginEvent;
+use Illuminate\Support\Facades\Auth;
 use App\Events\AdminLogin;
 use App\Model\Admin\User;
+use App\Model\Admin\LoginLog;
 use App\Service\BaseService;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Str;
+
 
 class LoginService extends BaseService
 {
+
+    use AuthenticatesUsers;
 
     public function __construct()
     {
@@ -16,12 +24,22 @@ class LoginService extends BaseService
 
     public function loginCheck($name,$password)
     {
+        $user = User::where('name', $name)->first();
 
-        //验证账号数据库里是否有此人
-        $user = User::where('name',$name)->first();
-        if(!$user) return $this->codeError("用户未找到");
+        if(!$user) return $this->codeError('查无此人');
 
-        event(new AdminLogin($name,request()->ip(),2,'密码错误'));
+        if (!password_verify($password, $user->password)) {
 
+            return $this->codeError('抱歉，账号名或者密码错误！');
+
+        }
+
+        event(new AdminLogin($name,request()->ip(),1,"登录成功"));
+
+        $api_token = Str::random(80);
+
+        $user->update(['api_token' => hash('sha256', $api_token)]);
+
+        return $this->codeSuccess('登录成功',compact('api_token'));
     }
 }

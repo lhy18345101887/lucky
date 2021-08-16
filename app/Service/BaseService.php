@@ -9,7 +9,10 @@ class BaseService
 {
     use GlobalMsg;
 
+//    use AuthenticatesUsers;
+
     public function __construct()
     {
+
     }
 }
